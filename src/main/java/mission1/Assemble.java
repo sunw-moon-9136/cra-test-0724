@@ -27,8 +27,8 @@ public class Assemble {
         while (true) {
             clearConsoleOut();
             showMenuBy(step);
-            String input = getInputFrom(scanner);
 
+            String input = getInputFrom(scanner);
             if (isExit(input)) {
                 System.out.println("바이바이");
                 break;
@@ -47,11 +47,7 @@ public class Assemble {
             }
 
             if (isUndo(answer)) {
-                if (step == Run_Test) {
-                    step = CarType_Q;
-                } else if (step > CarType_Q) {
-                    step--;
-                }
+                step = undoAndGetNextStep(step);
                 continue;
             }
 
@@ -59,6 +55,15 @@ public class Assemble {
         }
 
         scanner.close();
+    }
+
+    private static int undoAndGetNextStep(int step) {
+        if (step == Run_Test) {
+            step = CarType_Q;
+        } else if (step > CarType_Q) {
+            step--;
+        }
+        return step;
     }
 
     private static int doStepAndGetNextStep(int step, int answer) {
