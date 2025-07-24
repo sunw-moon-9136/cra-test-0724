@@ -18,6 +18,6 @@ public enum Engine {
     public static Engine from(int answer) {
         return Arrays.stream(Engine.values())
                 .filter(type -> type.getIndex() == answer)
-                .findAny().get();
+                .findAny().orElseThrow(() -> new IllegalArgumentException("Invalid answer"));
     }
 }

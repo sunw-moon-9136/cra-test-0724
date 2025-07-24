@@ -16,6 +16,6 @@ public enum Steering {
     public static Steering from(int answer) {
         return Arrays.stream(Steering.values())
                 .filter(type -> type.getIndex() == answer)
-                .findAny().get();
+                .findAny().orElseThrow(() -> new IllegalArgumentException("Invalid answer"));
     }
 }

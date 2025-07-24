@@ -18,6 +18,6 @@ public enum CarType {
     public static CarType from(int answer) {
         return Arrays.stream(CarType.values())
                 .filter(type -> type.getIndex() == answer)
-                .findAny().get();
+                .findAny().orElseThrow(() -> new IllegalArgumentException("Invalid answer"));
     }
 }

@@ -17,6 +17,6 @@ public enum Brake {
     public static Brake from(int answer) {
         return Arrays.stream(Brake.values())
                 .filter(type -> type.getIndex() == answer)
-                .findAny().get();
+                .findAny().orElseThrow(() -> new IllegalArgumentException("Invalid answer"));
     }
 }
