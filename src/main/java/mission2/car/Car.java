@@ -85,8 +85,8 @@ public class Car {
         System.out.println("자동차가 동작됩니다.");
     }
 
-
-    private void printFailMessage(String message) {
+    @VisibleForTesting
+    void printFailMessage(String message) {
         System.out.println("자동차 부품 조합 테스트 결과 : FAIL");
         System.out.println(message);
     }

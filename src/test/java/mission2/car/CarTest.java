@@ -67,6 +67,23 @@ class CarTest {
 
     @Test
     void testProducedCar() {
+        // when
+        car.testProducedCar();
+
+        // then
+        verify(car, times(0)).printFailMessage(anyString());
+    }
+
+    @Test
+    void testProducedCar_when_invalid() {
+        // given
+        car.setType(CarType.SUV);
+
+        // when
+        car.testProducedCar();
+
+        // then
+        verify(car, times(1)).printFailMessage(anyString());
     }
 
     @Test
