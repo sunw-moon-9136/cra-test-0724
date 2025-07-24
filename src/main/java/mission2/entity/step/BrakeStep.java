@@ -31,7 +31,7 @@ public class BrakeStep extends Step {
     }
 
     @Override
-    public boolean isValidRange() {
+    public boolean isValidRange(int answer) {
         if (answer < 0 || answer > 3) {
             System.out.println("ERROR :: 제동장치는 1 ~ 3 범위만 선택 가능");
             return false;
@@ -40,7 +40,7 @@ public class BrakeStep extends Step {
     }
 
     @Override
-    protected void doProcess(Car car) {
+    protected void doProcess(Car car, int answer) {
         Brake part = Brake.from(answer);
         car.setBrake(part);
         System.out.printf("%s 제동장치를 선택하셨습니다.\n", part.name());

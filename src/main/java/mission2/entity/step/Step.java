@@ -3,31 +3,24 @@ package mission2.entity.step;
 import lombok.Setter;
 import mission2.entity.car.Car;
 
+@Setter
 public abstract class Step {
 
     protected Step backStep;
     protected Step afterStep;
 
-    @Setter
-    protected int answer = -1;
-
-    public void setSteps(Step backStep, Step afterStep) {
-        this.backStep = backStep;
-        this.afterStep = afterStep;
-    }
-
     public abstract void initPart(Car car);
 
     public abstract void printMenu();
 
-    public abstract boolean isValidRange();
+    public abstract boolean isValidRange(int answer);
 
-    public Step process(Car car) {
+    public Step process(Car car, int answer) {
         if (isGoBack(answer)) {
             return backStep;
         }
 
-        doProcess(car);
+        doProcess(car, answer);
         return afterStep;
     }
 
@@ -35,5 +28,5 @@ public abstract class Step {
         return answer == 0;
     }
 
-    protected abstract void doProcess(Car car);
+    protected abstract void doProcess(Car car, int answer);
 }

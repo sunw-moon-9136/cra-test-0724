@@ -36,7 +36,7 @@ public class CarTypeStep extends Step {
     }
 
     @Override
-    public boolean isValidRange() {
+    public boolean isValidRange(int answer) {
         if (answer < 1 || answer > 3) {
             System.out.println("ERROR :: 차량 타입은 1 ~ 3 범위만 선택 가능");
             return false;
@@ -45,7 +45,7 @@ public class CarTypeStep extends Step {
     }
 
     @Override
-    protected void doProcess(Car car) {
+    protected void doProcess(Car car, int answer) {
         CarType part = CarType.from(answer);
         car.setType(part);
         System.out.printf("차량 타입으로 %s을 선택하셨습니다.\n", part.name());

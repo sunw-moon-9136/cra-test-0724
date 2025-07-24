@@ -31,7 +31,7 @@ public class RunTestStep extends Step {
     }
 
     @Override
-    public boolean isValidRange() {
+    public boolean isValidRange(int answer) {
         if (answer < 0 || answer > 2) {
             System.out.println("ERROR :: Run 또는 Test 중 하나를 선택 필요");
             return false;
@@ -40,7 +40,7 @@ public class RunTestStep extends Step {
     }
 
     @Override
-    protected void doProcess(Car car) {
+    protected void doProcess(Car car, int answer) {
         if (answer == 1) {
             car.runProducedCar();
             delay(2000);

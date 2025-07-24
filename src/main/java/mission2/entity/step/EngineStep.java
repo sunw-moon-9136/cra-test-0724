@@ -32,7 +32,7 @@ public class EngineStep extends Step {
     }
 
     @Override
-    public boolean isValidRange() {
+    public boolean isValidRange(int answer) {
         if (answer < 0 || answer > 4) {
             System.out.println("ERROR :: 엔진은 1 ~ 4 범위만 선택 가능");
             return false;
@@ -41,7 +41,7 @@ public class EngineStep extends Step {
     }
 
     @Override
-    protected void doProcess(Car car) {
+    protected void doProcess(Car car, int answer) {
         Engine part = Engine.from(answer);
         car.setEngine(part);
         System.out.printf("%s 엔진을 선택하셨습니다.\n", part.name());

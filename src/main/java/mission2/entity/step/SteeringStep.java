@@ -30,7 +30,7 @@ public class SteeringStep extends Step {
     }
 
     @Override
-    public boolean isValidRange() {
+    public boolean isValidRange(int answer) {
         if (answer < 0 || answer > 2) {
             System.out.println("ERROR :: 조향장치는 1 ~ 2 범위만 선택 가능");
             return false;
@@ -39,7 +39,7 @@ public class SteeringStep extends Step {
     }
 
     @Override
-    protected void doProcess(Car car) {
+    protected void doProcess(Car car, int answer) {
         Steering part = Steering.from(answer);
         car.setSteering(part);
         System.out.printf("%s 조향장치를 선택하셨습니다.\n", part.name());

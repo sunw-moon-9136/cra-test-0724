@@ -1,7 +1,7 @@
 package mission2;
 
 import mission2.entity.car.Car;
-import mission2.entity.step.*;
+import mission2.entity.step.StepOrderInitializer;
 import mission2.util.ConsoleUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -10,9 +10,7 @@ import static mission2.util.CommonUtils.delay;
 public class Main {
 
     public static void main(String[] args) {
-        initSteps();
-
-        Step currentStep = CarTypeStep.getInstance();
+        var currentStep = StepOrderInitializer.getInstance().getFirstStep();
         Car car = new Car();
 
         while (true) {
@@ -31,24 +29,16 @@ public class Main {
                 continue;
             }
 
-            currentStep.setAnswer(Integer.parseInt(input));
-            if (!currentStep.isValidRange()) {
+            int answer = Integer.parseInt(input);
+            if (!currentStep.isValidRange(answer)) {
                 delay(800);
                 continue;
             }
 
-            currentStep = currentStep.process(car);
+            currentStep = currentStep.process(car, answer);
         }
 
         ConsoleUtils.closeScanner();
-    }
-
-    private static void initSteps() {
-        CarTypeStep.getInstance().setSteps(CarTypeStep.getInstance(), EngineStep.getInstance());
-        EngineStep.getInstance().setSteps(CarTypeStep.getInstance(), BrakeStep.getInstance());
-        BrakeStep.getInstance().setSteps(EngineStep.getInstance(), SteeringStep.getInstance());
-        SteeringStep.getInstance().setSteps(BrakeStep.getInstance(), RunTestStep.getInstance());
-        RunTestStep.getInstance().setSteps(CarTypeStep.getInstance(), RunTestStep.getInstance());
     }
 
     private static boolean isExit(String input) {
