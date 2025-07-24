@@ -1,13 +1,11 @@
 package mission2.entity.car;
 
-import lombok.Getter;
 import lombok.Setter;
 import mission2.entity.part.Brake;
 import mission2.entity.part.CarType;
 import mission2.entity.part.Engine;
 import mission2.entity.part.Steering;
 
-@Getter
 @Setter
 public class Car {
 
@@ -83,5 +81,12 @@ public class Car {
     private void printFailMessage(String message) {
         System.out.println("자동차 부품 조합 테스트 결과 : FAIL");
         System.out.println(message);
+    }
+
+    public void clear() {
+        type = null;
+        engine = null;
+        brake = null;
+        steering = null;
     }
 }

@@ -21,7 +21,7 @@ public class CarTypeStep extends Step {
 
     @Override
     public void initPart(Car car) {
-        car = new Car();
+        car.clear();
     }
 
     @Override
