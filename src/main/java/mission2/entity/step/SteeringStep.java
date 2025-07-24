@@ -2,6 +2,7 @@ package mission2.entity.step;
 
 import mission2.entity.car.Car;
 import mission2.entity.part.Steering;
+import mission2.util.CommonUtils;
 import mission2.util.ConsoleUtils;
 
 public class SteeringStep extends Step {
@@ -16,6 +17,11 @@ public class SteeringStep extends Step {
             steeringStep = new SteeringStep(EngineStep.getInstance(), RunTestStep.getInstance());
         }
         return steeringStep;
+    }
+
+    @Override
+    public void initPart(Car car) {
+        car.setSteering(null);
     }
 
     @Override
@@ -44,5 +50,6 @@ public class SteeringStep extends Step {
         Steering part = Steering.from(answer);
         car.setSteering(part);
         System.out.printf("%s 조향장치를 선택하셨습니다.\n", part.name());
+        CommonUtils.delay(800);
     }
 }

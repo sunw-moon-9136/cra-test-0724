@@ -20,6 +20,11 @@ public class RunTestStep extends Step {
     }
 
     @Override
+    public void initPart(Car car) {
+        // TODO: Part 관련된부분은 나중에 interface로 변경
+    }
+
+    @Override
     public void printMenu() {
         ConsoleUtils.clearConsoleOut();
         System.out.println("""

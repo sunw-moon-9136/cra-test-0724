@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import mission2.entity.car.Car;
-import mission2.util.CommonUtils;
 
 @Getter
 @RequiredArgsConstructor
@@ -16,6 +15,8 @@ public abstract class Step {
     @Setter
     protected int answer = -1;
 
+    public abstract void initPart(Car car);
+
     public abstract void printMenu();
 
     public abstract boolean isValidRange();
@@ -26,8 +27,6 @@ public abstract class Step {
         }
 
         doProcess(car);
-        // runtest 외에는 아래 delay 있음
-        CommonUtils.delay(800);
         return afterStep;
     }
 

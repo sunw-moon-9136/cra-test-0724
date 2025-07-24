@@ -15,6 +15,7 @@ public class Main {
         Car car = new Car();
 
         while (true) {
+            currentStep.initPart(car);
             currentStep.printMenu();
             String input = ConsoleUtils.getInputFrom();
 

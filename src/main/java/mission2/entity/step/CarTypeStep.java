@@ -2,6 +2,7 @@ package mission2.entity.step;
 
 import mission2.entity.car.Car;
 import mission2.entity.part.CarType;
+import mission2.util.CommonUtils;
 import mission2.util.ConsoleUtils;
 
 public class CarTypeStep extends Step {
@@ -16,6 +17,11 @@ public class CarTypeStep extends Step {
             carTypeStep = new CarTypeStep(carTypeStep, EngineStep.getInstance());
         }
         return carTypeStep;
+    }
+
+    @Override
+    public void initPart(Car car) {
+        car = new Car();
     }
 
     @Override
@@ -50,5 +56,6 @@ public class CarTypeStep extends Step {
         CarType part = CarType.from(answer);
         car.setType(part);
         System.out.printf("차량 타입으로 %s을 선택하셨습니다.\n", part.name());
+        CommonUtils.delay(800);
     }
 }
