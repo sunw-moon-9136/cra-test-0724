@@ -3,7 +3,6 @@ package mission2.entity.step;
 import mission2.entity.car.Car;
 import mission2.entity.part.Engine;
 import mission2.util.CommonUtils;
-import mission2.util.ConsoleUtils;
 
 public class EngineStep extends Step {
     private static final EngineStep engineStep = new EngineStep();
@@ -19,7 +18,7 @@ public class EngineStep extends Step {
 
     @Override
     public void printMenu() {
-        ConsoleUtils.clearConsoleOut();
+        clearConsoleOut();
         System.out.println("""
                 어떤 엔진을 탑재할까요?
                 0. 뒤로가기

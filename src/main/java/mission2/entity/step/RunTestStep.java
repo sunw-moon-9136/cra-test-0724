@@ -1,7 +1,6 @@
 package mission2.entity.step;
 
 import mission2.entity.car.Car;
-import mission2.util.ConsoleUtils;
 
 import static mission2.util.CommonUtils.delay;
 
@@ -19,7 +18,7 @@ public class RunTestStep extends Step {
 
     @Override
     public void printMenu() {
-        ConsoleUtils.clearConsoleOut();
+        clearConsoleOut();
         System.out.println("""
                 멋진 차량이 완성되었습니다.
                 어떤 동작을 할까요?
@@ -43,12 +42,11 @@ public class RunTestStep extends Step {
     protected void doProcess(Car car, int answer) {
         if (answer == 1) {
             car.runProducedCar();
-            delay(2000);
         } else if (answer == 2) {
             System.out.println("Test...");
             delay(1500);
             car.testProducedCar();
-            delay(2000);
         }
+        delay(2000);
     }
 }

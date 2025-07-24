@@ -1,22 +1,27 @@
 package mission2.util;
 
+import com.google.common.annotations.VisibleForTesting;
+import lombok.Setter;
+
 import java.util.Scanner;
 
 public class ConsoleUtils {
-    private static final String CLEAR_SCREEN = "\033[H\033[2J";
-    private static final Scanner SCANNER = new Scanner(System.in);
+    @VisibleForTesting
+    @Setter
+    private static final ConsoleUtils CONSOLE_UTILS_INSTANCE = new ConsoleUtils();
 
-    public static void clearConsoleOut() {
-        System.out.print(CLEAR_SCREEN);
-        System.out.flush();
+    public static ConsoleUtils getInstance() {
+        return CONSOLE_UTILS_INSTANCE;
     }
 
-    public static String getInputFrom() {
+    private static final Scanner SCANNER = new Scanner(System.in);
+
+    public String getInput() {
         System.out.print("INPUT > ");
         return SCANNER.nextLine().trim();
     }
 
-    public static void closeScanner() {
+    public void closeScanner() {
         SCANNER.close();
     }
 }

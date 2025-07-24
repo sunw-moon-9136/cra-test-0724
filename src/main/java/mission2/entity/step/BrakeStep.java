@@ -3,7 +3,6 @@ package mission2.entity.step;
 import mission2.entity.car.Car;
 import mission2.entity.part.Brake;
 import mission2.util.CommonUtils;
-import mission2.util.ConsoleUtils;
 
 public class BrakeStep extends Step {
     private static final BrakeStep brakeStep = new BrakeStep();
@@ -19,7 +18,7 @@ public class BrakeStep extends Step {
 
     @Override
     public void printMenu() {
-        ConsoleUtils.clearConsoleOut();
+        clearConsoleOut();
         System.out.println("""
                 어떤 제동장치를 선택할까요?
                 0. 뒤로가기

@@ -1,10 +1,11 @@
 package mission2.util;
 
+import lombok.SneakyThrows;
+
 public class CommonUtils {
+
+    @SneakyThrows
     public static void delay(int ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException ignored) {
-        }
+        Thread.sleep(ms);
     }
 }

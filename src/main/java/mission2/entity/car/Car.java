@@ -1,14 +1,20 @@
 package mission2.entity.car;
 
+import com.google.common.annotations.VisibleForTesting;
+import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.Setter;
 import mission2.entity.part.Brake;
 import mission2.entity.part.CarType;
 import mission2.entity.part.Engine;
 import mission2.entity.part.Steering;
 
+@VisibleForTesting
+@Getter(AccessLevel.PROTECTED)
 @Setter
 public class Car {
 
+    @VisibleForTesting
     private CarType type;
     private Engine engine;
     private Brake brake;
@@ -38,7 +44,15 @@ public class Car {
         else System.out.println("자동차 부품 조합 테스트 결과 : PASS");
     }
 
-    private boolean isValidCheck() {
+    public void clear() {
+        type = null;
+        engine = null;
+        brake = null;
+        steering = null;
+    }
+
+    @VisibleForTesting
+    boolean isValidCheck() {
         if (isContinentalConstraint()) return false;
         if (isToyotaConstraint()) return false;
         if (isWiaConstraint()) return false;
@@ -50,7 +64,8 @@ public class Car {
         return engine == Engine.BROKEN;
     }
 
-    private void printRunnableCarInfo() {
+    @VisibleForTesting
+    void printRunnableCarInfo() {
         System.out.printf("Car Type : %s\n", type.name());
         System.out.printf("Engine   : %s\n", engine.name());
         System.out.printf("Brake    : %s\n", brake.name());
@@ -81,12 +96,5 @@ public class Car {
     private void printFailMessage(String message) {
         System.out.println("자동차 부품 조합 테스트 결과 : FAIL");
         System.out.println(message);
-    }
-
-    public void clear() {
-        type = null;
-        engine = null;
-        brake = null;
-        steering = null;
     }
 }

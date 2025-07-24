@@ -3,7 +3,6 @@ package mission2.entity.step;
 import mission2.entity.car.Car;
 import mission2.entity.part.CarType;
 import mission2.util.CommonUtils;
-import mission2.util.ConsoleUtils;
 
 public class CarTypeStep extends Step {
     private static final CarTypeStep carTypeStep = new CarTypeStep();
@@ -19,7 +18,7 @@ public class CarTypeStep extends Step {
 
     @Override
     public void printMenu() {
-        ConsoleUtils.clearConsoleOut();
+        clearConsoleOut();
         System.out.println("""
                         ______________
                        /|            |
