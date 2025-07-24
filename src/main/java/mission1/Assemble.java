@@ -7,16 +7,16 @@ import java.util.Scanner;
 public class Assemble {
     private static final String CLEAR_SCREEN = "\033[H\033[2J";
 
-    private static final int CAR_TYPE_Q = 0;
-    private static final int ENGINE_Q = 1;
-    private static final int BRAKE_SYSTEM_Q = 2;
-    private static final int STEERING_SYSTEM_Q = 3;
-    private static final int RUN_TEST = 4;
+    private static final int CAR_TYPE_STEP = 0;
+    private static final int ENGINE_STEP = 1;
+    private static final int BRAKE_SYSTEM_STEP = 2;
+    private static final int STEERING_SYSTEM_STEP = 3;
+    private static final int RUN_TEST_STEP = 4;
 
-    private static final int SEDAN_T = 1, SUV_T = 2, TRUCK_T = 3;
-    private static final int GM_E = 1, TOYOTA_E = 2, WIA_E = 3, BROKEN_E = 4;
-    private static final int MANDO_B = 1, CONTINENTAL_B = 2, BOSCH_B = 3;
-    private static final int BOSCH_S = 1, MOBIS_S = 2;
+    private static final int SEDAN_TYPE = 1, SUV_TYPE = 2, TRUCK_TYPE = 3;
+    private static final int GM_ENGINE = 1, TOYOTA_ENGINE = 2, WIA_ENGINE = 3, BROKEN_ENGINE = 4;
+    private static final int MANDO_BRAKE = 1, CONTINENTAL_BRAKE = 2, BOSCH_BRAKE = 3;
+    private static final int BOSCH_STEERING = 1, MOBIS_STEERING = 2;
 
     public static final String GM = "GM", TOYOTA = "TOYOTA", WIA = "WIA";
     public static final String MANDO = "MANDO", CONTINENTAL = "CONTINENTAL", BOSCH = "BOSCH", MOBIS = "MOBIS";
@@ -26,7 +26,7 @@ public class Assemble {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int step = CAR_TYPE_Q;
+        int step = CAR_TYPE_STEP;
 
         while (true) {
             showMenuBy(step);
@@ -66,11 +66,11 @@ public class Assemble {
         System.out.flush();
 
         switch (step) {
-            case CAR_TYPE_Q -> showCarTypeMenu();
-            case ENGINE_Q -> showEngineMenu();
-            case BRAKE_SYSTEM_Q -> showBrakeMenu();
-            case STEERING_SYSTEM_Q -> showSteeringMenu();
-            case RUN_TEST -> showRunTestMenu();
+            case CAR_TYPE_STEP -> showCarTypeMenu();
+            case ENGINE_STEP -> showEngineMenu();
+            case BRAKE_SYSTEM_STEP -> showBrakeMenu();
+            case STEERING_SYSTEM_STEP -> showSteeringMenu();
+            case RUN_TEST_STEP -> showRunTestMenu();
         }
     }
 
@@ -145,31 +145,31 @@ public class Assemble {
 
     private static boolean isValidRange(int step, int ans) {
         switch (step) {
-            case CAR_TYPE_Q -> {
+            case CAR_TYPE_STEP -> {
                 if (ans < 1 || ans > 3) {
                     System.out.println("ERROR :: 차량 타입은 1 ~ 3 범위만 선택 가능");
                     return false;
                 }
             }
-            case ENGINE_Q -> {
+            case ENGINE_STEP -> {
                 if (ans < 0 || ans > 4) {
                     System.out.println("ERROR :: 엔진은 1 ~ 4 범위만 선택 가능");
                     return false;
                 }
             }
-            case BRAKE_SYSTEM_Q -> {
+            case BRAKE_SYSTEM_STEP -> {
                 if (ans < 0 || ans > 3) {
                     System.out.println("ERROR :: 제동장치는 1 ~ 3 범위만 선택 가능");
                     return false;
                 }
             }
-            case STEERING_SYSTEM_Q -> {
+            case STEERING_SYSTEM_STEP -> {
                 if (ans < 0 || ans > 2) {
                     System.out.println("ERROR :: 조향장치는 1 ~ 2 범위만 선택 가능");
                     return false;
                 }
             }
-            case RUN_TEST -> {
+            case RUN_TEST_STEP -> {
                 if (ans < 0 || ans > 2) {
                     System.out.println("ERROR :: Run 또는 Test 중 하나를 선택 필요");
                     return false;
@@ -185,20 +185,20 @@ public class Assemble {
 
     private static int goBackAndGetNextStep(int step) {
         return switch (step) {
-            case RUN_TEST, CAR_TYPE_Q -> CAR_TYPE_Q;
+            case RUN_TEST_STEP, CAR_TYPE_STEP -> CAR_TYPE_STEP;
             default -> step - 1;
         };
     }
 
     private static int doStepAndGetNextStep(int step, int answer) {
         switch (step) {
-            case CAR_TYPE_Q -> selectCarType(answer);
-            case ENGINE_Q -> selectEngine(answer);
-            case BRAKE_SYSTEM_Q -> selectBrakeSystem(answer);
-            case STEERING_SYSTEM_Q -> selectSteeringSystem(answer);
-            case RUN_TEST -> {
+            case CAR_TYPE_STEP -> selectCarType(answer);
+            case ENGINE_STEP -> selectEngine(answer);
+            case BRAKE_SYSTEM_STEP -> selectBrakeSystem(answer);
+            case STEERING_SYSTEM_STEP -> selectSteeringSystem(answer);
+            case RUN_TEST_STEP -> {
                 selectRunOrTest(answer);
-                return RUN_TEST;
+                return RUN_TEST_STEP;
             }
             default -> throw new IllegalArgumentException("Not Supported Step");
         }
@@ -207,22 +207,22 @@ public class Assemble {
     }
 
     private static void selectCarType(int select) {
-        inputStack[CAR_TYPE_Q] = select;
+        inputStack[CAR_TYPE_STEP] = select;
         System.out.printf("차량 타입으로 %s을 선택하셨습니다.\n", getCarTypeName(select));
     }
 
     private static void selectEngine(int select) {
-        inputStack[ENGINE_Q] = select;
+        inputStack[ENGINE_STEP] = select;
         System.out.printf("%s 엔진을 선택하셨습니다.\n", getEngineName(select));
     }
 
     private static void selectBrakeSystem(int select) {
-        inputStack[BRAKE_SYSTEM_Q] = select;
+        inputStack[BRAKE_SYSTEM_STEP] = select;
         System.out.printf("%s 제동장치를 선택하셨습니다.\n", getBrakeName(select));
     }
 
     private static void selectSteeringSystem(int select) {
-        inputStack[STEERING_SYSTEM_Q] = select;
+        inputStack[STEERING_SYSTEM_STEP] = select;
         System.out.printf("%s 조향장치를 선택하셨습니다.\n", getSteeringName(select));
     }
 
@@ -258,7 +258,7 @@ public class Assemble {
         else if (isToyotaConstraint()) printFailMessage("SUV에는 TOYOTA엔진 사용 불가");
         else if (isWiaConstraint()) printFailMessage("Truck에는 WIA엔진 사용 불가");
         else if (isMandoConstraint()) printFailMessage("Truck에는 Mando제동장치 사용 불가");
-        else if (isBoschConstraint()) printFailMessage("Bosch제동장치에는 Bosch조향장치 이외 사용 불가");
+        else if (isBoschConstraint()) printFailMessage("Bosch제동장치에는 Bosch조향장치 이외 사용 불가0");
         else System.out.println("자동차 부품 조합 테스트 결과 : PASS");
     }
 
@@ -271,35 +271,35 @@ public class Assemble {
     }
 
     private static boolean isBrokenEngine() {
-        return inputStack[ENGINE_Q] == BROKEN_E;
+        return inputStack[ENGINE_STEP] == BROKEN_ENGINE;
     }
 
     private static void printRunnableCarInfo() {
-        System.out.printf("Car Type : %s\n", getCarTypeName(inputStack[CAR_TYPE_Q]));
-        System.out.printf("Engine   : %s\n", getEngineName(inputStack[ENGINE_Q]));
-        System.out.printf("Brake    : %s\n", getBrakeName(inputStack[BRAKE_SYSTEM_Q]));
-        System.out.printf("Steering : %s\n", getSteeringName(inputStack[STEERING_SYSTEM_Q]));
+        System.out.printf("Car Type : %s\n", getCarTypeName(inputStack[CAR_TYPE_STEP]));
+        System.out.printf("Engine   : %s\n", getEngineName(inputStack[ENGINE_STEP]));
+        System.out.printf("Brake    : %s\n", getBrakeName(inputStack[BRAKE_SYSTEM_STEP]));
+        System.out.printf("Steering : %s\n", getSteeringName(inputStack[STEERING_SYSTEM_STEP]));
         System.out.println("자동차가 동작됩니다.");
     }
 
     private static boolean isContinentalConstraint() {
-        return inputStack[CAR_TYPE_Q] == SEDAN_T && inputStack[BRAKE_SYSTEM_Q] == CONTINENTAL_B;
+        return inputStack[CAR_TYPE_STEP] == SEDAN_TYPE && inputStack[BRAKE_SYSTEM_STEP] == CONTINENTAL_BRAKE;
     }
 
     private static boolean isToyotaConstraint() {
-        return inputStack[CAR_TYPE_Q] == SUV_T && inputStack[ENGINE_Q] == TOYOTA_E;
+        return inputStack[CAR_TYPE_STEP] == SUV_TYPE && inputStack[ENGINE_STEP] == TOYOTA_ENGINE;
     }
 
     private static boolean isWiaConstraint() {
-        return inputStack[CAR_TYPE_Q] == TRUCK_T && inputStack[ENGINE_Q] == WIA_E;
+        return inputStack[CAR_TYPE_STEP] == TRUCK_TYPE && inputStack[ENGINE_STEP] == WIA_ENGINE;
     }
 
     private static boolean isMandoConstraint() {
-        return inputStack[CAR_TYPE_Q] == TRUCK_T && inputStack[BRAKE_SYSTEM_Q] == MANDO_B;
+        return inputStack[CAR_TYPE_STEP] == TRUCK_TYPE && inputStack[BRAKE_SYSTEM_STEP] == MANDO_BRAKE;
     }
 
     private static boolean isBoschConstraint() {
-        return inputStack[BRAKE_SYSTEM_Q] == BOSCH_B && inputStack[STEERING_SYSTEM_Q] != BOSCH_S;
+        return inputStack[BRAKE_SYSTEM_STEP] == BOSCH_BRAKE && inputStack[STEERING_SYSTEM_STEP] != BOSCH_STEERING;
     }
 
     private static void printFailMessage(String message) {
@@ -309,36 +309,36 @@ public class Assemble {
 
     private static String getCarTypeName(int select) {
         return switch (select) {
-            case SEDAN_T -> SEDAN;
-            case SUV_T -> SUV;
-            case TRUCK_T -> TRUCK;
+            case SEDAN_TYPE -> SEDAN;
+            case SUV_TYPE -> SUV;
+            case TRUCK_TYPE -> TRUCK;
             default -> throw new IllegalArgumentException("Not Supported Select Number");
         };
     }
 
     private static String getEngineName(int select) {
         return switch (select) {
-            case GM_E -> GM;
-            case TOYOTA_E -> TOYOTA;
-            case WIA_E -> WIA;
-            case BROKEN_E -> "고장난 엔진";
+            case GM_ENGINE -> GM;
+            case TOYOTA_ENGINE -> TOYOTA;
+            case WIA_ENGINE -> WIA;
+            case BROKEN_ENGINE -> "고장난 엔진";
             default -> throw new IllegalArgumentException("Not Supported Select Number");
         };
     }
 
     private static String getBrakeName(int select) {
         return switch (select) {
-            case MANDO_B -> MANDO;
-            case CONTINENTAL_B -> CONTINENTAL;
-            case BOSCH_B -> BOSCH;
+            case MANDO_BRAKE -> MANDO;
+            case CONTINENTAL_BRAKE -> CONTINENTAL;
+            case BOSCH_BRAKE -> BOSCH;
             default -> throw new IllegalArgumentException("Not Supported Select Number");
         };
     }
 
     private static String getSteeringName(int select) {
         return switch (select) {
-            case BOSCH_S -> BOSCH;
-            case MOBIS_S -> MOBIS;
+            case BOSCH_STEERING -> BOSCH;
+            case MOBIS_STEERING -> MOBIS;
             default -> throw new IllegalArgumentException("Not Supported Select Number");
         };
     }
