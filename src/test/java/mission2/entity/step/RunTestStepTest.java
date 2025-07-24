@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.mockito.Mockito.*;
 
 class RunTestStepTest {
@@ -67,5 +68,10 @@ class RunTestStepTest {
         // then
         verify(car, times(0)).runProducedCar();
         verify(car, times(0)).testProducedCar();
+    }
+
+    @Test
+    void printMenu() {
+        assertThatNoException().isThrownBy(() -> runTestStep.printMenu());
     }
 }

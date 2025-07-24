@@ -16,7 +16,7 @@ public class Main {
     @VisibleForTesting
     @Setter(AccessLevel.PACKAGE)
     private static ConsoleUtils consoleUtils = ConsoleUtils.getInstance();
-    
+
     @VisibleForTesting
     @Setter(AccessLevel.PACKAGE)
     private static Step currentStep = StepOrderInitializer.getInstance().getFirstStep();
@@ -27,9 +27,17 @@ public class Main {
         while (true) {
             currentStep.printMenu();
 
-            String input = getInput();
-            if (input == null) break;
-            if (isNumeric(input)) continue;
+            String input = consoleUtils.getInput();
+            if (isExit(input)) {
+                System.out.println("바이바이");
+                break;
+            }
+
+            if (!StringUtils.isNumeric(input)) {
+                System.out.println("ERROR :: 숫자만 입력 가능");
+                delay(800);
+                continue;
+            }
 
             int answer = Integer.parseInt(input);
             if (!currentStep.isValidRange(answer)) {
@@ -43,25 +51,6 @@ public class Main {
         consoleUtils.closeScanner();
     }
 
-    @VisibleForTesting
-    static boolean isNumeric(String input) {
-        if (!StringUtils.isNumeric(input)) {
-            System.out.println("ERROR :: 숫자만 입력 가능");
-            delay(800);
-            return true;
-        }
-        return false;
-    }
-
-    @VisibleForTesting
-    static String getInput() {
-        String input = consoleUtils.getInput();
-        if (isExit(input)) {
-            System.out.println("바이바이");
-            return null;
-        }
-        return input;
-    }
 
     private static boolean isExit(String input) {
         return input.equalsIgnoreCase("exit");

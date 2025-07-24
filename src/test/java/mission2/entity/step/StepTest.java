@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
@@ -42,6 +43,11 @@ class StepTest {
 
         // then
         verify(step, times(1)).doProcess(any(), anyInt());
+    }
+
+    @Test
+    void clearConsoleOut() {
+        assertThatNoException().isThrownBy(() -> step.clearConsoleOut());
     }
 
     public static class CarForTest extends Car {

@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 
 class BrakeStepTest {
 
@@ -46,5 +47,10 @@ class BrakeStepTest {
 
         // then
         assertThat(car.getBrake()).isEqualTo(Brake.MANDO);
+    }
+
+    @Test
+    void printMenu() {
+        assertThatNoException().isThrownBy(() -> brakeStep.printMenu());
     }
 }

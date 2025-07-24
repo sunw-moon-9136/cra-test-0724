@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 
 class SteeringStepTest {
 
@@ -46,5 +47,10 @@ class SteeringStepTest {
 
         // then
         assertThat(car.getSteering()).isEqualTo(Steering.BOSCH);
+    }
+
+    @Test
+    void printMenu() {
+        assertThatNoException().isThrownBy(() -> steeringStep.printMenu());
     }
 }
