@@ -1,10 +1,10 @@
-package mission2.entity.step;
+package mission2.step;
 
-import mission2.entity.car.Car;
-import mission2.entity.part.Brake;
-import mission2.entity.part.CarType;
-import mission2.entity.part.Engine;
-import mission2.entity.part.Steering;
+import mission2.car.Car;
+import mission2.part.Brake;
+import mission2.part.CarType;
+import mission2.part.Engine;
+import mission2.part.Steering;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Spy;

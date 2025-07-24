@@ -1,6 +1,6 @@
-package mission2.entity.step;
+package mission2.step;
 
-import mission2.entity.part.Steering;
+import mission2.part.Brake;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -8,33 +8,33 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
-class SteeringStepTest {
+class BrakeStepTest {
 
-    SteeringStep steeringStep = SteeringStep.getInstance();
+    BrakeStep brakeStep = BrakeStep.getInstance();
 
     @Test
     void initPart() {
         // given
         StepTest.CarForTest car = new StepTest.CarForTest();
-        car.setSteering(Steering.BOSCH);
+        car.setBrake(Brake.BOSCH);
 
         // when
-        steeringStep.initPart(car);
+        brakeStep.initPart(car);
 
         // then
-        assertThat(car.getEngine()).isNull();
+        assertThat(car.getBrake()).isNull();
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 1, 2})
+    @ValueSource(ints = {0, 1, 2, 3})
     void isValidRange_then_true(int answer) {
-        assertThat(steeringStep.isValidRange(answer)).isTrue();
+        assertThat(brakeStep.isValidRange(answer)).isTrue();
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {-1, 3})
+    @ValueSource(ints = {-1, 4})
     void isValidRange_then_false(int answer) {
-        assertThat(steeringStep.isValidRange(answer)).isFalse();
+        assertThat(brakeStep.isValidRange(answer)).isFalse();
     }
 
     @Test
@@ -43,14 +43,14 @@ class SteeringStepTest {
         StepTest.CarForTest car = new StepTest.CarForTest();
 
         // when
-        steeringStep.doProcess(car, 1);
+        brakeStep.doProcess(car, 1);
 
         // then
-        assertThat(car.getSteering()).isEqualTo(Steering.BOSCH);
+        assertThat(car.getBrake()).isEqualTo(Brake.MANDO);
     }
 
     @Test
     void printMenu() {
-        assertThatNoException().isThrownBy(() -> steeringStep.printMenu());
+        assertThatNoException().isThrownBy(() -> brakeStep.printMenu());
     }
 }

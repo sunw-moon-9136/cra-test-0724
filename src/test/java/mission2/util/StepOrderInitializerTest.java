@@ -1,6 +1,6 @@
 package mission2.util;
 
-import mission2.entity.step.CarTypeStep;
+import mission2.step.CarTypeStep;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

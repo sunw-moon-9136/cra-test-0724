@@ -1,4 +1,4 @@
-package mission2.entity.part;
+package mission2.part;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,6 @@ public enum Engine {
     public static Engine from(int answer) {
         return Arrays.stream(Engine.values())
                 .filter(type -> type.getIndex() == answer)
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("Invalid item answer: " + answer));
+                .findAny().get();
     }
 }

@@ -1,6 +1,6 @@
-package mission2.entity.step;
+package mission2.step;
 
-import mission2.entity.car.Car;
+import mission2.car.Car;
 
 import static mission2.util.CommonUtils.delay;
 

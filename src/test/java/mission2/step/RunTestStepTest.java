@@ -1,6 +1,6 @@
-package mission2.entity.step;
+package mission2.step;
 
-import mission2.entity.car.Car;
+import mission2.car.Car;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

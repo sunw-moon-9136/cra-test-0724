@@ -1,6 +1,6 @@
 package mission2;
 
-import mission2.entity.step.Step;
+import mission2.step.Step;
 import mission2.util.ConsoleUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

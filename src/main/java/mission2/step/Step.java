@@ -1,7 +1,7 @@
-package mission2.entity.step;
+package mission2.step;
 
 import lombok.Setter;
-import mission2.entity.car.Car;
+import mission2.car.Car;
 
 @Setter
 public abstract class Step {

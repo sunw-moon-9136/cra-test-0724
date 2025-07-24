@@ -1,6 +1,6 @@
-package mission2.entity.step;
+package mission2.step;
 
-import mission2.entity.part.Engine;
+import mission2.part.CarType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -8,33 +8,33 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
-class EngineStepTest {
+class CarTypeStepTest {
 
-    EngineStep engineStep = EngineStep.getInstance();
+    CarTypeStep carTypeStep = CarTypeStep.getInstance();
 
     @Test
     void initPart() {
         // given
         StepTest.CarForTest car = new StepTest.CarForTest();
-        car.setEngine(Engine.GM);
+        car.setType(CarType.Sedan);
 
         // when
-        engineStep.initPart(car);
+        carTypeStep.initPart(car);
 
         // then
-        assertThat(car.getEngine()).isNull();
+        assertThat(car.getType()).isNull();
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 1, 2, 3, 4})
+    @ValueSource(ints = {1, 2, 3})
     void isValidRange_then_true(int answer) {
-        assertThat(engineStep.isValidRange(answer)).isTrue();
+        assertThat(carTypeStep.isValidRange(answer)).isTrue();
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {-1, 5})
+    @ValueSource(ints = {0, 4})
     void isValidRange_then_false(int answer) {
-        assertThat(engineStep.isValidRange(answer)).isFalse();
+        assertThat(carTypeStep.isValidRange(answer)).isFalse();
     }
 
     @Test
@@ -43,14 +43,14 @@ class EngineStepTest {
         StepTest.CarForTest car = new StepTest.CarForTest();
 
         // when
-        engineStep.doProcess(car, 1);
+        carTypeStep.doProcess(car, 1);
 
         // then
-        assertThat(car.getEngine()).isEqualTo(Engine.GM);
+        assertThat(car.getType()).isEqualTo(CarType.Sedan);
     }
 
     @Test
     void printMenu() {
-        assertThatNoException().isThrownBy(() -> engineStep.printMenu());
+        assertThatNoException().isThrownBy(() -> carTypeStep.printMenu());
     }
 }

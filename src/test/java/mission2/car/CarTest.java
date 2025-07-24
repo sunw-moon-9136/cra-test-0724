@@ -1,9 +1,9 @@
-package mission2.entity.car;
+package mission2.car;
 
-import mission2.entity.part.Brake;
-import mission2.entity.part.CarType;
-import mission2.entity.part.Engine;
-import mission2.entity.part.Steering;
+import mission2.part.Brake;
+import mission2.part.CarType;
+import mission2.part.Engine;
+import mission2.part.Steering;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

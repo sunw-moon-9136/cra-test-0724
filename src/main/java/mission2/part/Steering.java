@@ -1,4 +1,4 @@
-package mission2.entity.part;
+package mission2.part;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,6 @@ public enum Steering {
     public static Steering from(int answer) {
         return Arrays.stream(Steering.values())
                 .filter(type -> type.getIndex() == answer)
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("Invalid item answer: " + answer));
+                .findAny().get();
     }
 }
