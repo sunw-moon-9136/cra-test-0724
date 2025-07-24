@@ -1,0 +1,48 @@
+package mission2.entity.step;
+
+import mission2.entity.car.Car;
+import mission2.entity.part.Steering;
+import mission2.util.ConsoleUtils;
+
+public class SteeringStep extends Step {
+    public SteeringStep(Step backStep, Step nextStep) {
+        super(backStep, nextStep);
+    }
+
+    private static SteeringStep steeringStep;
+
+    public static SteeringStep getInstance() {
+        if (steeringStep == null) {
+            steeringStep = new SteeringStep(EngineStep.getInstance(), RunTestStep.getInstance());
+        }
+        return steeringStep;
+    }
+
+    @Override
+    public void printMenu() {
+        ConsoleUtils.clearConsoleOut();
+        System.out.println("""
+                어떤 조향장치를 선택할까요?
+                0. 뒤로가기
+                1. BOSCH
+                2. MOBIS
+                ===============================
+                """);
+    }
+
+    @Override
+    public boolean isValidRange() {
+        if (answer < 0 || answer > 2) {
+            System.out.println("ERROR :: 조향장치는 1 ~ 2 범위만 선택 가능");
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    protected void doProcess(Car car) {
+        Steering part = Steering.from(answer);
+        car.setSteering(part);
+        System.out.printf("%s 조향장치를 선택하셨습니다.\n", part.name());
+    }
+}
