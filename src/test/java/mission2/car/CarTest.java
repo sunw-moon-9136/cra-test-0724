@@ -87,6 +87,12 @@ class CarTest {
     }
 
     @Test
+    void isValidCheck_when_false() {
+        car.setBrake(Brake.CONTINENTAL);
+        assertThat(car.isValidCheck()).isFalse();
+    }
+
+    @Test
     void clear() {
         //when
         car.clear();

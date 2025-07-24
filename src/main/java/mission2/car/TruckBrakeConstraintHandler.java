@@ -11,6 +11,9 @@ public class TruckBrakeConstraintHandler implements ConstraintHandler {
 
     @Override
     public boolean isInvalid(Car car) {
-        return car.getType() == CarType.Truck && car.getBrake() == Brake.MANDO;
+        if (car.getType() != CarType.Truck)
+            return false;
+        
+        return car.getBrake() == Brake.MANDO;
     }
 }

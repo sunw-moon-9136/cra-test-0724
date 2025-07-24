@@ -11,6 +11,9 @@ public class SedanConstraintHandler implements ConstraintHandler {
 
     @Override
     public boolean isInvalid(Car car) {
-        return car.getType() == CarType.Sedan && car.getBrake() == Brake.CONTINENTAL;
+        if (car.getType() != CarType.Sedan)
+            return false;
+
+        return car.getBrake() == Brake.CONTINENTAL;
     }
 }

@@ -11,6 +11,8 @@ public class TruckEngineConstraintHandler implements ConstraintHandler {
 
     @Override
     public boolean isInvalid(Car car) {
-        return car.getType() == CarType.Truck && car.getEngine() == Engine.WIA;
+        if (car.getType() != CarType.Truck)
+            return false;
+        return car.getEngine() == Engine.WIA;
     }
 }

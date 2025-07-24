@@ -11,6 +11,9 @@ public class SuvConstraintHandler implements ConstraintHandler {
 
     @Override
     public boolean isInvalid(Car car) {
-        return car.getType() == CarType.SUV && car.getEngine() == Engine.TOYOTA;
+        if (car.getType() != CarType.SUV)
+            return false;
+        
+        return car.getEngine() == Engine.TOYOTA;
     }
 }

@@ -11,6 +11,8 @@ public class BoschSteeringConstraintHandler implements ConstraintHandler {
 
     @Override
     public boolean isInvalid(Car car) {
-        return car.getBrake() == Brake.BOSCH && car.getSteering() != Steering.BOSCH;
+        if (car.getBrake() != Brake.BOSCH)
+            return false;
+        return car.getSteering() != Steering.BOSCH;
     }
 }
