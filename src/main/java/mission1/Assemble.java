@@ -1,5 +1,7 @@
 package mission1;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Scanner;
 
 public class Assemble {
@@ -19,54 +21,32 @@ public class Assemble {
     private static int[] stack = new int[5];
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         int step = CarType_Q;
 
         while (true) {
-            System.out.print(CLEAR_SCREEN);
-            System.out.flush();
+            clearConsoleOut();
+            showMenuBy(step);
+            String input = getInputFrom(scanner);
 
-            switch (step) {
-                case CarType_Q:
-                    showCarTypeMenu();
-                    break;
-                case Engine_Q:
-                    showEngineMenu();
-                    break;
-                case BrakeSystem_Q:
-                    showBrakeMenu();
-                    break;
-                case SteeringSystem_Q:
-                    showSteeringMenu();
-                    break;
-                case Run_Test:
-                    showRunTestMenu();
-                    break;
-            }
-
-            System.out.print("INPUT > ");
-            String buf = sc.nextLine().trim();
-
-            if (buf.equalsIgnoreCase("exit")) {
+            if (isExit(input)) {
                 System.out.println("바이바이");
                 break;
             }
 
-            int answer;
-            try {
-                answer = Integer.parseInt(buf);
-            } catch (NumberFormatException e) {
+            if (!StringUtils.isNumeric(input)) {
                 System.out.println("ERROR :: 숫자만 입력 가능");
                 delay(800);
                 continue;
             }
 
+            int answer = Integer.parseInt(input);
             if (!isValidRange(step, answer)) {
                 delay(800);
                 continue;
             }
 
-            if (answer == 0) {
+            if (isUndo(answer)) {
                 if (step == Run_Test) {
                     step = CarType_Q;
                 } else if (step > CarType_Q) {
@@ -75,42 +55,80 @@ public class Assemble {
                 continue;
             }
 
-            switch (step) {
-                case CarType_Q:
-                    selectCarType(answer);
-                    delay(800);
-                    step = Engine_Q;
-                    break;
-                case Engine_Q:
-                    selectEngine(answer);
-                    delay(800);
-                    step = BrakeSystem_Q;
-                    break;
-                case BrakeSystem_Q:
-                    selectBrakeSystem(answer);
-                    delay(800);
-                    step = SteeringSystem_Q;
-                    break;
-                case SteeringSystem_Q:
-                    selectSteeringSystem(answer);
-                    delay(800);
-                    step = Run_Test;
-                    break;
-                case Run_Test:
-                    if (answer == 1) {
-                        runProducedCar();
-                        delay(2000);
-                    } else if (answer == 2) {
-                        System.out.println("Test...");
-                        delay(1500);
-                        testProducedCar();
-                        delay(2000);
-                    }
-                    break;
-            }
+            step = doStepAndGetNextStep(step, answer);
         }
 
-        sc.close();
+        scanner.close();
+    }
+
+    private static int doStepAndGetNextStep(int step, int answer) {
+        switch (step) {
+            case CarType_Q:
+                selectCarType(answer);
+                delay(800);
+                return Engine_Q;
+            case Engine_Q:
+                selectEngine(answer);
+                delay(800);
+                return BrakeSystem_Q;
+            case BrakeSystem_Q:
+                selectBrakeSystem(answer);
+                delay(800);
+                return SteeringSystem_Q;
+            case SteeringSystem_Q:
+                selectSteeringSystem(answer);
+                delay(800);
+                return Run_Test;
+            case Run_Test:
+                if (answer == 1) {
+                    runProducedCar();
+                    delay(2000);
+                } else if (answer == 2) {
+                    System.out.println("Test...");
+                    delay(1500);
+                    testProducedCar();
+                    delay(2000);
+                }
+        }
+        return step;
+    }
+
+    private static boolean isUndo(int answer) {
+        return answer == 0;
+    }
+
+    private static boolean isExit(String input) {
+        return input.equalsIgnoreCase("exit");
+    }
+
+    private static String getInputFrom(Scanner sc) {
+        System.out.print("INPUT > ");
+        return sc.nextLine().trim();
+    }
+
+    private static void showMenuBy(int step) {
+        switch (step) {
+            case CarType_Q:
+                showCarTypeMenu();
+                break;
+            case Engine_Q:
+                showEngineMenu();
+                break;
+            case BrakeSystem_Q:
+                showBrakeMenu();
+                break;
+            case SteeringSystem_Q:
+                showSteeringMenu();
+                break;
+            case Run_Test:
+                showRunTestMenu();
+                break;
+        }
+    }
+
+    private static void clearConsoleOut() {
+        System.out.print(CLEAR_SCREEN);
+        System.out.flush();
     }
 
     private static void showCarTypeMenu() {

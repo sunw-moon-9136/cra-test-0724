@@ -12,7 +12,8 @@ repositories {
 dependencies {
     implementation("com.google.guava:guava:33.4.8-jre")
     implementation("org.projectlombok:lombok:1.18.38")
-
+    implementation("org.apache.commons:commons-lang3:3.18.0")
+    
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.mockito:mockito-core:5.18.0")
