@@ -1,0 +1,1 @@
+rootProject.name = "cra-test-0724"
