@@ -6,16 +6,9 @@ import mission2.util.CommonUtils;
 import mission2.util.ConsoleUtils;
 
 public class CarTypeStep extends Step {
-    private static CarTypeStep carTypeStep;
-
-    private CarTypeStep(Step backStep, Step nextStep) {
-        super(backStep, nextStep);
-    }
+    private static final CarTypeStep carTypeStep = new CarTypeStep();
 
     public static CarTypeStep getInstance() {
-        if (carTypeStep == null) {
-            carTypeStep = new CarTypeStep(carTypeStep, EngineStep.getInstance());
-        }
         return carTypeStep;
     }
 

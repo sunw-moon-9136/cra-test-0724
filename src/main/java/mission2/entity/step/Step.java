@@ -1,19 +1,20 @@
 package mission2.entity.step;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import mission2.entity.car.Car;
 
-@Getter
-@RequiredArgsConstructor
 public abstract class Step {
 
-    protected final Step backStep;
-    protected final Step afterStep;
+    protected Step backStep;
+    protected Step afterStep;
 
     @Setter
     protected int answer = -1;
+
+    public void setSteps(Step backStep, Step afterStep) {
+        this.backStep = backStep;
+        this.afterStep = afterStep;
+    }
 
     public abstract void initPart(Car car);
 

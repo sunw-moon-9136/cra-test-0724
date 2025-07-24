@@ -6,16 +6,9 @@ import mission2.util.ConsoleUtils;
 import static mission2.util.CommonUtils.delay;
 
 public class RunTestStep extends Step {
-    private static RunTestStep runTestStep;
-
-    public RunTestStep(Step backStep, Step nextStep) {
-        super(backStep, nextStep);
-    }
+    private static final RunTestStep runTestStep = new RunTestStep();
 
     public static RunTestStep getInstance() {
-        if (runTestStep == null) {
-            runTestStep = new RunTestStep(CarTypeStep.getInstance(), runTestStep);
-        }
         return runTestStep;
     }
 

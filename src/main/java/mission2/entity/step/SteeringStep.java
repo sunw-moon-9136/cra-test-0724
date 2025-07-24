@@ -6,16 +6,9 @@ import mission2.util.CommonUtils;
 import mission2.util.ConsoleUtils;
 
 public class SteeringStep extends Step {
-    public SteeringStep(Step backStep, Step nextStep) {
-        super(backStep, nextStep);
-    }
-
-    private static SteeringStep steeringStep;
+    private static final SteeringStep steeringStep = new SteeringStep();
 
     public static SteeringStep getInstance() {
-        if (steeringStep == null) {
-            steeringStep = new SteeringStep(EngineStep.getInstance(), RunTestStep.getInstance());
-        }
         return steeringStep;
     }
 

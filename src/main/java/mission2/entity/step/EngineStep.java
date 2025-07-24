@@ -6,16 +6,9 @@ import mission2.util.CommonUtils;
 import mission2.util.ConsoleUtils;
 
 public class EngineStep extends Step {
-    public EngineStep(Step backStep, Step nextStep) {
-        super(backStep, nextStep);
-    }
-
-    private static EngineStep engineStep;
+    private static final EngineStep engineStep = new EngineStep();
 
     public static EngineStep getInstance() {
-        if (engineStep == null) {
-            engineStep = new EngineStep(CarTypeStep.getInstance(), BrakeStep.getInstance());
-        }
         return engineStep;
     }
 

@@ -6,16 +6,9 @@ import mission2.util.CommonUtils;
 import mission2.util.ConsoleUtils;
 
 public class BrakeStep extends Step {
-    public BrakeStep(Step backStep, Step nextStep) {
-        super(backStep, nextStep);
-    }
-
-    private static BrakeStep brakeStep;
+    private static final BrakeStep brakeStep = new BrakeStep();
 
     public static BrakeStep getInstance() {
-        if (brakeStep == null) {
-            brakeStep = new BrakeStep(EngineStep.getInstance(), SteeringStep.getInstance());
-        }
         return brakeStep;
     }
 
